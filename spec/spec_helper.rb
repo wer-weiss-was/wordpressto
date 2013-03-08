@@ -1,5 +1,6 @@
 require 'rubygems'
-require 'lib/wordpressto.rb'
+require 'rspec'
+require 'wordpressto'
 include Wordpressto
 
 def valid_wordpress_blog_options

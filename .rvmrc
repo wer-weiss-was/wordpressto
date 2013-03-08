@@ -1,0 +1,2 @@
+rvm ruby-1.9.3-p362@worldpressto --create
+export PATH=./bin:$PATH

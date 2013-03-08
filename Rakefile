@@ -1,16 +1,17 @@
-require 'rubygems'
-require 'spec/rake/spectask'
+#!/usr/bin/env rake
 
-desc "Run all specs in spec directory"
-Spec::Rake::SpecTask.new do |t| 
-  t.spec_opts = ['--options', "\"spec/spec.opts\""]
-  t.spec_files = FileList['spec/*_spec.rb']
+begin
+  require 'bundler/setup'
+rescue LoadError
+  puts 'You must `gem install bundler` and `bundle install` to run rake tasks'
 end
 
-require 'rake/rdoctask'
+begin
+  require 'rspec/core/rake_task'
+  RSpec::Core::RakeTask.new(:spec)
+  task default: :spec
+rescue LoadError
 
-Rake::RDocTask.new('rdoc') do |t|
-  t.rdoc_files.include('README.rdoc', 'LICENSE', 'lib/**/*.rb')
-  t.main = 'README.rdoc'
-  t.title = "Wordpressto Documentation"
 end
+
+Bundler::GemHelper.install_tasks
