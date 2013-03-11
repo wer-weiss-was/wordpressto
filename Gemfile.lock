@@ -1,8 +1,17 @@
+PATH
+  remote: .
+  specs:
+    wordpressto (0.2.0)
+      mime-types
+
 GEM
   remote: http://rubygems.org/
   specs:
+    bundle (0.0.1)
+      bundler
     diff-lcs (1.2.1)
     mime-types (1.21)
+    rake (10.0.3)
     rspec (2.13.0)
       rspec-core (~> 2.13.0)
       rspec-expectations (~> 2.13.0)
@@ -16,5 +25,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  mime-types
+  bundle
+  rake
   rspec (~> 2.13.0)
+  wordpressto!

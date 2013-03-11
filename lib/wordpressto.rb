@@ -2,6 +2,7 @@ require "xmlrpc/client"
 require 'uri'
 require 'mime/types'
 
+require "wordpressto/version"
 require 'wordpressto/base'
 require 'wordpressto/category_collection'
 require 'wordpressto/wordpress_attachment'
