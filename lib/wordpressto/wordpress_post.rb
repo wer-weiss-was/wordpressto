@@ -3,6 +3,7 @@ module Wordpressto
     attr_accessor :title, :description
     attr_accessor :created_at, :updated_at
     attr_accessor :keywords, :categories, :published
+    attr_accessor :custom_fields
 
     def initialize(attributes = { }, options = { })
       super(options)
@@ -21,6 +22,7 @@ module Wordpressto
       @updated_at = attr[:post_modified].to_time
       @id = attr[:post_id]
       @published = attr[:post_status]
+      @custom_fields = attr[:custom_fields]
     end
 
     def id

@@ -46,6 +46,7 @@ describe WordpressPost do
       @post.id.should == 1234
       @post.published.should == 'publish'
       @post.updated_at.should == Time.gm(2013,2,27,9,18,41)
+      @post.custom_fields.should == [{ id: "345", key: "homepage_teaser", value: "<div>Fooooooo</div>" }]
     end
 
   end
