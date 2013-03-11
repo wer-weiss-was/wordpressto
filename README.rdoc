@@ -23,7 +23,7 @@ often!
   blog.categories.each { |c| puts c.name }
 
   # Get the 20 most recent posts
-  blog.posts.find_recent(:limit => 20)
+  blog.posts.all(:limit => 20)
 
   # Create a new blog post
   post = blog.posts.new(:title => 'Test', :description => 'This is a test', 

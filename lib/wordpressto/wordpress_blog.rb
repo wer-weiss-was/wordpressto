@@ -21,12 +21,13 @@ module Wordpressto
       @categories ||= CategoryCollection.new(:conn => self)
     end
 
-    def get_recent_posts(limit = 10)
-      call('metaWeblog.getRecentPosts', blog_id, username, password, limit)
+    def get_recent_posts(options={})
+      options[:number] ||= options.delete(:limit) || 10000
+      call('wp.getPosts', blog_id, username, password, filter: options)
     end
 
-    def get_post(qid)
-      call('metaWeblog.getPost', qid, username, password)
+    def find_post(post_id)
+      call('wp.getPost', blog_id, username, password, post_id)
     end
 
     def edit_post(qid, attributes, published = nil)

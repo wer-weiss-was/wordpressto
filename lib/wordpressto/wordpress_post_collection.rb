@@ -1,18 +1,15 @@
 module Wordpressto
   class WordpressPostCollection < Base
-    def find_recent(options = { })
-      options = { :limit => 10 }.merge(options)
-      posts = conn.get_recent_posts(options[:limit])
+    def all(options={})
+      posts = conn.get_recent_posts(options)
       posts.collect { |post|  WordpressPost.new(post, :conn => conn) }
     end
 
-    def find(qid, options = { })
-      if qid.is_a?(Array)
-        qid.collect { |sqid| find(sqid) }
-      elsif qid == :recent
-        find_recent(options)
+    def find(post_id)
+      if post_id.is_a?(Array)
+        post_id.collect { |sqid| find(sqid) }
       else
-        post = conn.get_post(qid)
+        post = conn.find_post(post_id)
         WordpressPost.new(post, :conn => conn)
       end
     end

@@ -1,7 +1,7 @@
 module Wordpressto
   class WordpressPost < Base
     attr_accessor :title, :description
-    attr_accessor :created_at
+    attr_accessor :created_at, :updated_at
     attr_accessor :keywords, :categories, :published
 
     def initialize(attributes = { }, options = { })
@@ -11,16 +11,16 @@ module Wordpressto
 
     def attributes=(attr)
       symbolized_attr = { }
-      attr = attr.each { |k,v| symbolized_attr[k.to_sym] = v }
+      attr.each { |k,v| symbolized_attr[k.to_sym] = v }
       attr = symbolized_attr
-      @title = attr[:title]
-      @keywords = attr[:mt_keywords].to_s.split(/,|;/).collect { |k| k.strip }
-      @categories = attr[:categories]
-      @description = attr[:description]
-      @created_at = attr[:dateCreated]
-      @id = attr[:postid]
-      @userid = attr[:userid]
-      @published = attr[:published]
+      @title = attr[:post_title]
+      @keywords = taxonomy_collector(attr[:terms], 'post_tag')
+      @categories = taxonomy_collector(attr[:terms], 'category')
+      @description = attr[:post_content]
+      @created_at = attr[:post_date].to_time
+      @updated_at = attr[:post_modified].to_time
+      @id = attr[:post_id]
+      @published = attr[:post_status]
     end
 
     def id
@@ -46,30 +46,8 @@ module Wordpressto
       save
     end
 
-    def keywords
-      if @keywords.is_a? String
-        @keywords = @keywords.split(",")
-      elsif @keywords.is_a? Array
-        @keywords
-      else
-        []
-      end
-    end
-
     def created_at
       @created_at
-    end
-
-    def categories
-      if @categories.nil?
-        []
-      elsif @categories.is_a?(Array)
-        @categories
-      elsif @categories.is_a(String)
-        @categories = @categories.split(",")
-      else
-        []
-      end
     end
 
     def attributes
@@ -78,7 +56,7 @@ module Wordpressto
       h[:description] = description if description
       h[:dateCreated] = created_at if created_at
       h[:mt_keywords] = keywords.join(",")
-      h[:categories] = categories if categories
+      h[:categories] = categories.join(",") if categories
       h
     end
 
@@ -89,6 +67,14 @@ module Wordpressto
         @id = saved_id
         true
       end
+    end
+
+    private
+
+    def taxonomy_collector(terms, taxonomy)
+      terms.map do |term|
+        term[:name] if term[:taxonomy] == taxonomy
+      end.compact
     end
 
 

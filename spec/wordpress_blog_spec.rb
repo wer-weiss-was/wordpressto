@@ -22,16 +22,16 @@ describe WordpressBlog do
 
   it "should make xmlrpc calls to metaWeblog.getPost" do
     blog = a_wordpress_blog
-    blog.send(:xmlrpc).should_receive(:call).once.with('metaWeblog.getPost', 
-                                                       999, blog.username, blog.password )
-    blog.get_post(999)
+    blog.send(:xmlrpc).should_receive(:call).once.with('wp.getPost',
+                                                       666, blog.username, blog.password, 999 )
+    blog.find_post(999)
   end
 
   it "should make xmlrpc calls to metaWeblog.getRecentPosts" do
     blog = a_wordpress_blog
-    blog.send(:xmlrpc).should_receive(:call).once.with('metaWeblog.getRecentPosts',
-                                                       blog.blog_id, blog.username, blog.password,  345)
-    blog.get_recent_posts(345)
+    blog.send(:xmlrpc).should_receive(:call).once.with('wp.getPosts',
+                                                       666, blog.username, blog.password, { filter: { number: 15 }})
+    blog.get_recent_posts(number: 15)
   end
 
   describe "edit_post" do
