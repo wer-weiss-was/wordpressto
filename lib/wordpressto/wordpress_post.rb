@@ -22,7 +22,7 @@ module Wordpressto
       @updated_at = attr[:post_modified].to_time
       @id = attr[:post_id]
       @published = attr[:post_status]
-      @custom_fields = attr[:custom_fields]
+      @custom_fields = custom_fields_hash(attr[:custom_fields])
     end
 
     def id
@@ -79,6 +79,13 @@ module Wordpressto
       end.compact
     end
 
+    def custom_fields_hash(custom_fields)
+      fields = {}
+      custom_fields.each do |custom_field|
+        fields[custom_field[:key]] = custom_field[:value]
+      end
+      fields
+    end
 
   end
 end

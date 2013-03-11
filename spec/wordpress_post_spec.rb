@@ -33,6 +33,11 @@ describe WordpressPost do
                                           id:           "345",
                                           key:          "homepage_teaser",
                                           value:        "<div>Fooooooo</div>"
+                                      },
+                                      {
+                                          id:           "344",
+                                          key:          "foo",
+                                          value:        "bar"
                                       }
                                     ]
                   }
@@ -46,7 +51,7 @@ describe WordpressPost do
       @post.id.should == 1234
       @post.published.should == 'publish'
       @post.updated_at.should == Time.gm(2013,2,27,9,18,41)
-      @post.custom_fields.should == [{ id: "345", key: "homepage_teaser", value: "<div>Fooooooo</div>" }]
+      @post.custom_fields.should == { "homepage_teaser" => "<div>Fooooooo</div>", "foo" => 'bar' }
     end
 
   end
