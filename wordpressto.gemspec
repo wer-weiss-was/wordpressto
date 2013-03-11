@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name    = 'wordpressto'
-  s.version = '0.1'
-  s.date    = '2010-09-12'
+  s.version = '0.2'
+  s.date    = '2013-01-11'
   
   s.summary = "A Ruby library to interact with the Wordpress XMLRPC interface"
   s.description = "A Ruby library to interact with the Wordpress XMLRPC interface"
@@ -14,6 +14,7 @@ Gem::Specification.new do |s|
 
 	s.add_development_dependency('rake')
 	s.add_development_dependency('rspec')
+  s.add_development_dependency "bundle"
   
   s.has_rdoc = true
 
