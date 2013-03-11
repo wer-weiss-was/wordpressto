@@ -82,7 +82,7 @@ module Wordpressto
     def custom_fields_hash(custom_fields)
       fields = {}
       custom_fields.each do |custom_field|
-        fields[custom_field[:key]] = custom_field[:value]
+        fields[custom_field["key"]] = custom_field["value"]
       end
       fields
     end

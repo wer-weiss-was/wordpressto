@@ -30,7 +30,7 @@ describe WordpressBlog do
   it "should make xmlrpc calls to metaWeblog.getRecentPosts" do
     blog = a_wordpress_blog
     blog.send(:xmlrpc).should_receive(:call).once.with('wp.getPosts',
-                                                       666, blog.username, blog.password, { filter: { number: 15 }})
+                                                       666, blog.username, blog.password, { number: 15 })
     blog.get_recent_posts(number: 15)
   end
 

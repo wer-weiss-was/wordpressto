@@ -23,7 +23,7 @@ module Wordpressto
 
     def get_recent_posts(options={})
       options[:number] ||= options.delete(:limit) || 10000
-      call('wp.getPosts', blog_id, username, password, filter: options)
+      call('wp.getPosts', blog_id, username, password, options)
     end
 
     def find_post(post_id)
