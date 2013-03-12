@@ -20,7 +20,7 @@ module Wordpressto
       @description = attr[:post_content]
       @created_at = attr[:post_date].to_time
       @updated_at = attr[:post_modified].to_time
-      @id = attr[:post_id]
+      @id = attr[:post_id].to_i
       @published = attr[:post_status]
       @custom_fields = custom_fields_hash(attr[:custom_fields])
     end

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    wordpressto (0.2.3)
+    wordpressto (0.2.5)
       mime-types
 
 GEM

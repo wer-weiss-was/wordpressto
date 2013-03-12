@@ -30,14 +30,14 @@ describe WordpressPost do
                                     ],
                     custom_fields:  [
                                       {
-                                          id:           "345",
-                                          key:          "homepage_teaser",
-                                          value:        "<div>Fooooooo</div>"
+                                          "id" =>           "345",
+                                          "key" =>          "homepage_teaser",
+                                          "value" =>        "<div>Fooooooo</div>"
                                       },
                                       {
-                                          id:           "344",
-                                          key:          "foo",
-                                          value:        "bar"
+                                          "id" =>           "344",
+                                          "key" =>          "foo",
+                                          "value" =>        "bar"
                                       }
                                     ]
                   }
