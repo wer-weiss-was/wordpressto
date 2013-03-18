@@ -5,8 +5,7 @@ module Wordpressto
     attr_accessor :keywords, :categories, :published
     attr_accessor :custom_fields
 
-    def initialize(attributes = { }, options = { })
-      super(options)
+    def initialize(attributes = { })
       self.attributes = attributes
     end
 
@@ -34,12 +33,12 @@ module Wordpressto
     end
 
     def update
-      conn.edit_post(id, attributes, published)
+      edit_post(id, attributes, published)
       self
     end
 
     def create
-      @id = conn.new_post(attributes, published)
+      @id = new_post(attributes, published)
       self
     end
 
@@ -65,7 +64,7 @@ module Wordpressto
     def reload
       if id
         saved_id = id
-        self.attributes = conn.posts.find(id).attributes
+        self.attributes = posts.find(id).attributes
         @id = saved_id
         true
       end

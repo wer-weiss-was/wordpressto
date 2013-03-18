@@ -11,7 +11,7 @@ module Wordpressto
     end
 
     def save
-      ret = conn.upload_file(name, mimetype, bits)
+      ret = upload_file(name, mimetype, bits)
       self.url = ret["url"]
       self
     end

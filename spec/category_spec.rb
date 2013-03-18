@@ -2,16 +2,20 @@ require File.join(File.dirname(__FILE__), 'spec_helper')
 
 describe Category do
   describe "create" do
+    before(:each) do
+      @category = Category.new(valid_category_options)
+      Category.stub!(:new).with(valid_category_options).and_return(@category)
+    end
     it "should call wp.newCategory" do
       blog = a_wordpress_blog
-      blog.xmlrpc.should_receive(:call).once.with('wp.newCategory', blog.blog_id, blog.username, blog.password,
+      @category.xmlrpc.should_receive(:call).once.with('wp.newCategory', blog.blog_id, blog.username, blog.password,
                                                   hash_including("name" => valid_category_options[:name])).and_return(10)
       blog.categories.create valid_category_options
     end
 
     it "should return a Category instance with the right id" do
       blog = a_wordpress_blog
-      blog.xmlrpc.should_receive(:call).once.and_return(10)
+      @category.xmlrpc.should_receive(:call).once.and_return(10)
       blog.categories.create(valid_category_options).id.should == 10
     end
   end

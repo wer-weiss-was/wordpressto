@@ -3,16 +3,19 @@ require File.join(File.dirname(__FILE__), 'spec_helper')
 describe WordpressBlog do
 
   describe "initialize" do
+    before(:each) do
+      reset_config
+    end
+    it "should default to blog_id 1" do
+      WordpressBlog.new.blog_id.should == 1
+    end
     it "take the :username, :password, :url and :blog_id options" do
       blog = a_wordpress_blog
       blog.username.should == valid_wordpress_blog_options[:username]
       blog.password.should == valid_wordpress_blog_options[:password]
       blog.blog_id.should == valid_wordpress_blog_options[:blog_id]
     end
-    
-    it "should default to blog_id 1" do
-      WordpressBlog.new.blog_id.should == 1
-    end
+
   end
 
   it "should return an XMLRPC::Client" do
@@ -31,7 +34,7 @@ describe WordpressBlog do
     blog = a_wordpress_blog
     blog.send(:xmlrpc).should_receive(:call).once.with('wp.getPosts',
                                                        666, blog.username, blog.password, { number: 15 })
-    blog.get_recent_posts(number: 15)
+    blog.recent_posts(number: 15)
   end
 
   describe "edit_post" do
@@ -63,7 +66,7 @@ describe WordpressBlog do
 
   end
 
-  describe "new_post" do 
+  describe "new_post" do
     it "should make metaWeblog.newPost calls with no published arg by default" do
       blog = a_wordpress_blog
       blog.send(:xmlrpc).should_receive(:call).once.with('metaWeblog.newPost',
@@ -96,8 +99,8 @@ describe WordpressBlog do
       xmlrpc_valid_wordpress_upload_options = valid_wordpress_upload_options.merge({
         :bits => XMLRPC::Base64.new(valid_wordpress_upload_options[:bits])
       })
-      blog.send(:xmlrpc).should_receive(:call).once.with('wp.uploadFile', blog.blog_id, blog.username, 
-                                                         blog.password, 
+      blog.send(:xmlrpc).should_receive(:call).once.with('wp.uploadFile', blog.blog_id, blog.username,
+                                                         blog.password,
                                                          hash_including({
                                                                           :name => valid_wordpress_upload_options[:name],
                                                                           :type => valid_wordpress_upload_options[:type],
@@ -112,7 +115,6 @@ describe WordpressBlog do
   it "should return a CategoryCollection" do
     blog = a_wordpress_blog
     blog.categories.should be_a_kind_of CategoryCollection
-    blog.categories.conn.should == blog
   end
 
 end

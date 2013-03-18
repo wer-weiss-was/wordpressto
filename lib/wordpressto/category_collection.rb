@@ -10,12 +10,12 @@ module Wordpressto
     def all
       @categories ||= load
     end
-    
+
     # retrieve the categories via xmlrpc
     def load
       cats = []
-      conn.call('wp.getCategories', conn.blog_id, conn.username, conn.password).each do |c|
-        cats << Category.new_from_xmlrpc(c, :conn => conn)
+      call('wp.getCategories', blog_id, username, password).each do |c|
+        cats << Category.new_from_xmlrpc(c)
       end
       @categories = cats
     end
@@ -29,7 +29,7 @@ module Wordpressto
     end
 
     def create(attributes)
-      new_cat = Category.new(attributes, :conn => conn)
+      new_cat = Category.new(attributes)
       new_cat.save
       new_cat
     end

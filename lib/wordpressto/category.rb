@@ -1,6 +1,6 @@
 module Wordpressto
-  class Category
-    attr_reader :id, :category_id, :description, :name, :url, :rss_url, :conn
+  class Category < Base
+    attr_reader :id, :category_id, :description, :name, :rss_url
 
     def initialize(attributes = {}, options = {})
       @id = attributes[:id]
@@ -10,9 +10,8 @@ module Wordpressto
       @url = attributes[:url]
       @rss_url = attributes[:rss_url]
       @slug = attributes[:slug]
-      @conn = options[:conn]
     end
-    
+
     def self.new_from_xmlrpc(attributes, options = {})
       self.new( { :id => attributes['categoryId'], :category_id => attributes['parentId'],
                   :description => attributes['description'], :name => attributes['categoryName'],
@@ -21,7 +20,7 @@ module Wordpressto
     end
 
     def save
-      @id = conn.call 'wp.newCategory', conn.blog_id, conn.username, conn.password, to_xmlrpc_struct
+      @id = call 'wp.newCategory', blog_id, username, password, to_xmlrpc_struct
     end
 
     def to_xmlrpc_struct
