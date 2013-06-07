@@ -11,8 +11,8 @@ Gem::Specification.new do |s|
   s.summary         = "A Ruby library to interact with the Wordpress XMLRPC interface"
   s.description     = "A Ruby library to interact with the Wordpress XMLRPC interface"
   
-  s.authors         = ['John Leach', 'Piotr Szal']
-  s.email           = ['john@johnleach.co.uk', 'Piotr.Szal@akra.de']
+  s.authors         = ['John Leach']
+  s.email           = ['john@johnleach.co.uk']
   s.homepage        = 'http://github.com/johnl/wordpressto'
 
 
