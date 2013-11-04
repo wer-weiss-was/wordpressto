@@ -10,7 +10,7 @@ GEM
     bundle (0.0.1)
       bundler
     diff-lcs (1.2.1)
-    mime-types (1.21)
+    mime-types (2.0)
     rake (10.0.3)
     rspec (2.13.0)
       rspec-core (~> 2.13.0)
