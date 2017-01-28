@@ -33,5 +33,5 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency('rake')
   s.add_development_dependency('rspec', "~> 2.13.0")
-  s.add_development_dependency "bundle"
+  s.add_development_dependency "bundler"
 end

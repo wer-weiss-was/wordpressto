@@ -7,8 +7,6 @@ PATH
 GEM
   remote: http://rubygems.org/
   specs:
-    bundle (0.0.1)
-      bundler
     diff-lcs (1.2.1)
     mime-types (2.0)
     rake (10.0.3)
@@ -25,7 +23,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundle
+  bundler
   rake
   rspec (~> 2.13.0)
   wordpressto!
